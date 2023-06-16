@@ -1,0 +1,89 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #202124;
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+body {
+    background: var(--background);
+}
+
+header {
+    text-align: center;
+    color: white;
+    font: 400 12pt "Roboto", sans-serif;
+    margin: 64px 0 64px 0;
+}
+
+.board {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    border: 1px solid white;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-top: none;
+    border-right: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cell:nth-child(3n + 1){
+    border-left: none;
+}
+
+.cell:nth-child(n + 7){
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after {
+    content: "";
+    width: calc(var(--mark-size) * 0.15);
+    height: var(--mark-size);
+    background-color: white; 
+    position: absolute;
+}
+
+.cell.x::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after {
+    transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after {
+    content: ""; 
+    border-radius: 50%; 
+    position: absolute;
+}
+
+.cell.o::before {
+    width: calc(var(--mark-size) * 0.9);
+    height: calc(var(--mark-size) * 0.9);
+    background-color: white;
+}
+
+.cell.o::after {
+    width: calc(var(--mark-size) * 0.6);
+    height: calc(var(--mark-size) * 0.6);
+    background-color: var(--background);
+} 
+
