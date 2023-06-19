@@ -23,6 +23,10 @@ header {
     margin: 64px 0 64px 0;
 }
 
+main.end {
+    filter: blur(8px );
+}
+
 .board {
     display: grid;
     justify-content: center;
@@ -41,29 +45,43 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
+    cursor: pointer;
 }
 
 .cell:nth-child(3n + 1){
     border-left: none;
 }
-
+ 
 .cell:nth-child(n + 7){
     border-bottom: none;
 }
 
 .cell.x::before,
 .cell.x::after {
+    background-color: white;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    background-color: #3d3d3d;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.cell.x::before,
+.cell.x::after {
     content: "";
     width: calc(var(--mark-size) * 0.15);
-    height: var(--mark-size);
-    background-color: white; 
+    height: var(--mark-size); 
     position: absolute;
 }
 
-.cell.x::before {
+.board.x .cell:not(.x):not(.o):hover::before,
+.cell.x::before {                   
     transform: rotate(45deg);
 }
 
+.board.x .cell:not(.x):not(.o):hover::after,
 .cell.x::after {
     transform: rotate(-45deg);
 }
@@ -87,3 +105,34 @@ header {
     background-color: var(--background);
 } 
 
+.cell.x,
+.cell.o {
+    cursor: not-allowed; /*faz com que aquilo não seja clicavel*/
+}
+
+.game-end-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba(255, 255, 255, 0.9);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font: 400 24pt "Roboto", sans-serif;
+}
+
+.game-end-message button {
+    font-size: 14pt;
+    background-color: var(--background);
+    border: 1px solid white;
+    padding: 8px;
+    border-radius: 15px;
+    margin: 8px;
+    cursor: ;
+}
