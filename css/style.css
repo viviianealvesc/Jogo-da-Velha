@@ -25,6 +25,7 @@ header {
 
 main.end {
     filter: blur(8px );
+    -webkit-filter: blur(8px);
 }
 
 .board {
@@ -57,12 +58,14 @@ main.end {
 }
 
 .cell.x::before,
-.cell.x::after {
+.cell.x::after,
+.cell.x::before {
     background-color: white;
 }
 
 .board.x .cell:not(.x):not(.o):hover::before,
-.board.x .cell:not(.x):not(.o):hover::after {
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::before {
     background-color: #3d3d3d;
 }
 
@@ -86,6 +89,8 @@ main.end {
     transform: rotate(-45deg);
 }
 
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after,
 .cell.o::before,
 .cell.o::after {
     content: ""; 
@@ -93,12 +98,13 @@ main.end {
     position: absolute;
 }
 
+.board.o .cell:not(.x):not(.o):hover::before,
 .cell.o::before {
     width: calc(var(--mark-size) * 0.9);
     height: calc(var(--mark-size) * 0.9);
-    background-color: white;
 }
 
+.board.o .cell:not(.x):not(.o):hover::after,
 .cell.o::after {
     width: calc(var(--mark-size) * 0.6);
     height: calc(var(--mark-size) * 0.6);
@@ -119,7 +125,7 @@ main.end {
 
     background-color: rgba(255, 255, 255, 0.9);
 
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -130,9 +136,18 @@ main.end {
 .game-end-message button {
     font-size: 14pt;
     background-color: var(--background);
+    color: white;
     border: 1px solid white;
     padding: 8px;
     border-radius: 15px;
     margin: 8px;
-    cursor: ;
+    cursor: pointer;
+}
+
+.game-end-message button:hover {
+    filter: brightness(130%); /*Da uma clareada no botão*/
+}
+
+.game-end-message.show {
+    display: flex;
 }
